@@ -1,0 +1,152 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="DipokalHHJ">
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/shards-ui@latest/dist/css/shards.min.css">
+  <style>
+    body{
+      padding: 50px
+    }
+      .box {
+    width: 40px;
+    height: 40px; 
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.filebox label {
+  display: inline-block;
+  padding: .5em .75em;
+  color: #fff;
+  font-size: inherit;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #5cb85c;
+  cursor: pointer;
+  border: 1px solid #4cae4c;
+  border-radius: .25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.filebox label:hover {
+  background-color: #6ed36e;
+}
+
+.filebox label:active {
+  background-color: #367c36;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+  </style>
+</head>
+  <body class="text-center">
+      <br>
+      <h1>ZASK</h1>
+      <br>
+
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="alert alert-light col-12">
+            <form action="">
+              <textarea id="msg" class=" form-control" rows="6"></textarea>
+              <br>
+              <input type="submit" class="btn btn-success btn-block">
+            </form>
+          </div>
+
+          <div id="messages"></div>
+            <%  for (let i = 0; i < name.length; i++) { %>
+              <div class="alert alert-light text-left col-12">
+                <h3> <%=name[i]%> </h3>
+                <hr>
+                <%=msg[i]%> 
+
+              </div>
+            <%}%>
+          </div>
+        </div>
+        <br>
+      </div>
+
+    <!-- Optional JavaScript -->
+    <!-- JavaScript Dependencies: jQuery, Popper.js, Bootstrap JS, Shards JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+<script>
+  const getCookieValue = (key) => {
+  let cookieKey = key + "="; 
+  let result = "";
+  const cookieArr = document.cookie.split(";");
+  
+  for(let i = 0; i < cookieArr.length; i++) {
+    if(cookieArr[i][0] === " ") {
+      cookieArr[i] = cookieArr[i].substring(1);
+    }
+    
+    if(cookieArr[i].indexOf(cookieKey) === 0) {
+      result = cookieArr[i].slice(cookieKey.length, cookieArr[i].length);
+      return result;
+    }
+  }
+  return result;
+}
+
+
+
+    function random() {
+        var ranNum = Math.floor(Math.random()*(9999-1111+1)) + 1111;
+        return ranNum;
+    }
+
+
+        $(() => {
+          let token = getCookieValue('user')
+
+          const socket = io({
+            query: {token}
+          });
+          $('form').submit(() => {
+            //name, age, type, affiliation, link, phone
+            socket.emit('chat', $('#name').val(), $('#msg').val());
+              $('#name').val('');
+              $('#msg').val('');
+              return false;
+          });
+          socket.on('chat', (name, msg) => {
+            $('#messages').append(`<div class='alert alert-light text-left col-12'><b>${name}</b><hr>${msg}</div`);
+            $("#messages").scrollTop($("#messages")[0].scrollHeight);
+          });
+
+        });
+      </script>
+    
+
+  </body>
+</html>
+
