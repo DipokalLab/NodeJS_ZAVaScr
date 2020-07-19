@@ -9,64 +9,31 @@
     <!-- CSS Dependencies -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/shards-ui@latest/dist/css/shards.min.css">
-  <style>
-    body{
-      padding: 50px
-    }
-      .box {
-    width: 40px;
-    height: 40px; 
-    border-radius: 70%;
-    overflow: hidden;
-}
-.profile {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.filebox label {
-  display: inline-block;
-  padding: .5em .75em;
-  color: #fff;
-  font-size: inherit;
-  line-height: normal;
-  vertical-align: middle;
-  background-color: #5cb85c;
-  cursor: pointer;
-  border: 1px solid #4cae4c;
-  border-radius: .25em;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
-}
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+  />
+  <link rel="stylesheet" href="./style.css">
 
-.filebox label:hover {
-  background-color: #6ed36e;
-}
-
-.filebox label:active {
-  background-color: #367c36;
-}
-
-.filebox input[type="file"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-
-  </style>
 </head>
   <body class="text-center">
-      <br>
-      <h1>ZASK</h1>
-      <br>
+    <br>
 
 
-      <div class="container-fluid">
+      <div class="container">
+        <div class="row">
+          <div class="col-2 text-left">
+            <button class="btn" style="background-color:transparent" ><i class="fas fa-ellipsis-v menu"></i></button>
+            
+          </div>
+          <div class="col-8 text-center">
+            <h1>ZASK</h1>
+          </div>
+          <div class="col-2 text-right">
+            <button class="btn" style="background-color:transparent" ><i class="fas fa-search menu"></i></button>
+
+          </div>
+        </div>
         <div class="row">
           <div class="alert alert-light col-12">
             <form action="">
